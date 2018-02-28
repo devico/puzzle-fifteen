@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import Cell from './components/Cell.jsx'
+
 let startBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null]
 
 class Game extends React.Component {
@@ -15,9 +17,18 @@ class Game extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Fifteen Puzzle</h1>
-            </div>
+            <main>
+                <header>
+                    <h1>Fifteen Puzzle</h1>
+                </header>
+
+                <div className="puzzle-cells">
+                    {this.state.board.map((cell, id) => 
+                        <Cell key={id} number={cell} />
+                    )}
+                </div>
+            </main> 
+            
         )
     }
 }
