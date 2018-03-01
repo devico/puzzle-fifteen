@@ -1,5 +1,4 @@
 body {
-    background-color: #fafafa;
     color: #757575;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     margin: 0;
@@ -8,26 +7,27 @@ body {
 main {
     background: #fff;
     width: 415px;
-    margin: 70px auto;
+    margin: 5px auto;
     border-radius: 2px;
     overflow: hidden;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 header {
     display: flex;
     align-items: center;
+    margin: 20px auto;
     padding: 0 1rem;
     color: white;
-    background-color: #222;
+    background-color: #cee5d0;
     text-align: center;
     text-transform: uppercase;
 }
 
 header h1 {
     display: inline-block;
-    color: #00d8ff;
+    color: #5e454b;
     margin: 1rem auto;
+    letter-spacing: 3px;
 }
 
 .puzzle-cells {
@@ -35,14 +35,71 @@ header h1 {
 	flex-direction: row;
 	justify-content: space-around;
 	display: flex;
-	border: 1px solid #696989;
 	height: 415px;
 	width: 415px;
-	margin: auto;
+    margin: auto;
+    align-items: center;
 }
 
-.puzzle-cells > div {
-	border: 1px solid #696989;
+.cell {
+    background-color: mediumseagreen;
+    border-radius: 10px;
 	width: 100px;
-	height: 100px;
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.empty-cell {
+    background-color: #fff;
+    border-radius: 10px;
+	width: 100px;
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.cell-number {
+    color: #fff;
+    font-size: 30px;
+    margin-left: -15px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%)
+}
+
+.game-form {
+    display: flex;
+    margin: 30px auto;
+    padding: 10px;
+    position: relative;
+}
+
+button {
+    background-color: #5e454b;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 10px;
+    color: #fff;
+    height: 50px;
+    width: 165px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(0%, -50%);
 }
