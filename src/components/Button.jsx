@@ -2,14 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function Button(props) {
-    return  <button onClick={props.onShuffle}>
-                {props.title}
+    return  <button>
+                {props.status ? 'Выйти' : 'Начать'}
             </button>
 }
 
 Button.propTypes = {
-    title: PropTypes.string.isRequired,
-    onShuffle: PropTypes.func.isRequired
+    status: PropTypes.bool.isRequired
 }
 
 export default Button
