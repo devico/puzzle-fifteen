@@ -15,7 +15,7 @@ main {
 header {
     display: flex;
     align-items: center;
-    margin: 20px auto;
+    margin: 50px auto;
     padding: 0 1rem;
     color: white;
     background-color: #cee5d0;
@@ -36,8 +36,8 @@ header h1 {
 	justify-content: space-around;
 	display: flex;
 	height: 415px;
-	width: 415px;
-    margin: auto;
+    width: 415px;
+    margin: 10px auto;
     align-items: center;
 }
 
@@ -68,11 +68,10 @@ header h1 {
     transform: translate(0, -50%)
 }
 
-.game-form {
+.manage-box {
     display: flex;
-    margin: 30px auto;
+    margin: auto;
     padding: 10px;
-    position: relative;
 }
 
 button {
@@ -99,7 +98,5 @@ button {
     line-height: 50px;
     vertical-align: middle;
     position: absolute;
-    top: 50%;
-    left: 30%;
     transform: translate(0%, -50%);
 }
