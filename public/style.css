@@ -18,7 +18,6 @@ header {
     margin: 50px auto;
     padding: 0 1rem;
     color: white;
-    background-color: #cee5d0;
     text-align: center;
     text-transform: uppercase;
 }
@@ -43,7 +42,7 @@ header h1 {
 
 .cell {
     background-color: mediumseagreen;
-    border-radius: 10px;
+    border-radius: 3px;
 	width: 100px;
     height: 100px;
     text-align: center;
@@ -52,7 +51,6 @@ header h1 {
 
 .empty-cell {
     background-color: #fff;
-    border-radius: 10px;
 	width: 100px;
     height: 100px;
     text-align: center;
@@ -71,13 +69,13 @@ header h1 {
 .manage-box {
     display: flex;
     margin: auto;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
 }
 
 button {
     background-color: #5e454b;
-    border: 1px solid rgba(0,0,0,.1);
-    border-radius: 10px;
     color: #fff;
     height: 50px;
     width: 165px;
@@ -86,8 +84,7 @@ button {
     font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-size: 28px;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0;
+    letter-spacing: 2px;
     overflow: hidden;
     will-change: box-shadow;
     transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);

@@ -1,5 +1,5 @@
 import test from 'ava'
 
-test(t => {
+test("foobar", t => {
   t.deepEqual([1, 2], [2, 1])
 })
