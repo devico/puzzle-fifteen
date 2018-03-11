@@ -17,6 +17,13 @@ exports.swap = (xs, i1, i2) => {
   let x1 = xs[i1]
   let x2 = xs[i2]
   xs = R.update(i1, x2, xs)
-  xs = R.update(i2, x1, xs)
+  xs = R.update(i2, x1, xs) 
   return xs
+}
+
+exports.isGameEnded = (board) => {
+  let startBoard = board.slice()
+  let diff = function(a, b) { return a - b }
+  R.sort(diff, startBoard)
+  return R.equals(startBoard, board)
 }

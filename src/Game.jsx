@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import PT from 'prop-types'
 
 import Cell from './components/Cell'
-import {shuffleBoard, areSwappable, swap} from './helper'
+import { shuffleBoard, areSwappable, swap, isGameEnded } from './helper'
+import { indexOf, update } from 'ramda'
 
-const R = require('ramda')
 let startBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null]
 
 class Game extends React.Component {
@@ -20,6 +20,7 @@ class Game extends React.Component {
     this.handleStartGame = this.handleStartGame.bind(this)
     this.handleEndGame = this.handleEndGame.bind(this)
     this.handleSwapCells = this.handleSwapCells.bind(this)
+    this.handlePreEndGame = this.handlePreEndGame.bind(this)
   }
 
   handleEndGame() {
@@ -36,13 +37,31 @@ class Game extends React.Component {
     })
   }
 
+  handlePreEndGame() {
+    this.setState({
+      board: swap(this.props.startBoard, 14, 15)
+    })
+  }
+
   handleSwapCells(i){
     let {board} = this.state
-    let i2 = R.indexOf(null, board)
+    let i2 = indexOf(null, board)
     if (areSwappable(i, i2)) {
       this.setState({
         board: swap(board, i, i2)
-      })
+      }, () => console.log())
+    }
+    if(i == 15 || i2 == 14) {
+      setTimeout(() => { 
+        if(isGameEnded(this.state.board)) {
+          alert('You win!')
+          this.setState({
+            board: this.props.startBoard,
+            gameStarted: false
+          })
+        }
+          
+      }, 2000)
     }
   }
 
@@ -59,10 +78,16 @@ class Game extends React.Component {
       </div>
 
       <div className="manage-box">
-        {this.state.gameStarted
-          ? <button onClick={this.handleEndGame}>Выйти</button>
-          : <button onClick={this.handleStartGame}>Начать</button>
-        }
+        <div>
+          {this.state.gameStarted
+            ? <button onClick={this.handleEndGame}>Выйти</button>
+            : <button onClick={this.handleStartGame}>Начать</button>
+          }
+        </div>
+        <div>
+          <button onClick={this.handlePreEndGame}>За 1 шаг</button>
+        </div>
+        
       </div>  
     </main>
   }

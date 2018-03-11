@@ -94,6 +94,6 @@ button {
     text-align: center;
     line-height: 50px;
     vertical-align: middle;
-    position: absolute;
+    position: relative;
     transform: translate(0%, -50%);
 }
