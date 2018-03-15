@@ -9,14 +9,13 @@ main {
     width: 415px;
     margin: 5px auto;
     border-radius: 2px;
-    overflow: hidden;
 }
 
 header {
     display: flex;
     align-items: center;
-    margin: 50px auto;
-    padding: 0 1rem;
+    margin: auto;
+    padding: 10px;
     color: white;
     text-align: center;
     text-transform: uppercase;
@@ -25,7 +24,7 @@ header {
 header h1 {
     display: inline-block;
     color: #5e454b;
-    margin: 1rem auto;
+    margin: 0px auto;
     letter-spacing: 3px;
 }
 
@@ -36,7 +35,7 @@ header h1 {
 	display: flex;
 	height: 415px;
     width: 415px;
-    margin: 10px auto;
+    margin-top: 50px;
     align-items: center;
 }
 
@@ -96,4 +95,19 @@ button {
     vertical-align: middle;
     position: relative;
     transform: translate(0%, -50%);
+}
+
+.timer {
+    padding: 15px 10px 5px 10px;
+}
+
+.timer-time {
+    font-family: monospace;
+    font-size: 2em;
+    color: #5e454b;
+}
+
+.timer-controls button {
+    margin: 5px;
+    color: white;
 }

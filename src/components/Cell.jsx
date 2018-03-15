@@ -1,21 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import PT from 'prop-types'
 
-function Cell(props) {
+export default function Cell(props) {
+  let {number, onClick} = props
   return  <button 
             type="button" 
-            className={`${props.number ? 'cell' : 'empty-cell'}`} 
-            onClick={() => props.onClick(props.id)}
-        
+            className={`${number ? 'cell' : 'empty-cell'}`} 
+            onClick={onClick}
           >
-            <span className="cell-number">{props.number}</span>
+            <span className="cell-number">{number}</span>
           </button>
 }
 
 Cell.propTypes = {
-  id: PropTypes.number,
-  number: PropTypes.number,
-  onClick: PropTypes.func.isRequired
+  number: PT.number,
+  onClick: PT.func.isRequired
 }
-
-export default Cell

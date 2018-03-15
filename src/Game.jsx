@@ -1,67 +1,76 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PT from 'prop-types'
 
+import * as R from 'ramda'
+import {solvedBoard} from "./constants"
+import { shuffleBoard, areSwappable, swap, isGameEnded } from './helpers'
 import Cell from './components/Cell'
-import { shuffleBoard, areSwappable, swap, isGameEnded } from './helper'
-import { indexOf, update } from 'ramda'
+import Timer from './components/Timer'
 
-let startBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null]
-
-class Game extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      board: this.props.startBoard,
-      gameStarted: false
+      board: solvedBoard,
+      gameStarted: false,
+      gameEnded: false
     }
 
     this.handleStartGame = this.handleStartGame.bind(this)
     this.handleEndGame = this.handleEndGame.bind(this)
     this.handleSwapCells = this.handleSwapCells.bind(this)
-    this.handlePreEndGame = this.handlePreEndGame.bind(this)
+    this.handleFastStartGame = this.handleFastStartGame.bind(this)
   }
 
   handleEndGame() {
     this.setState({
-      board: this.props.startBoard,
-      gameStarted: false
+      board: solvedBoard,
+      gameStarted: false,
+      gameEnded: false
     })
   }
 
   handleStartGame() {
     this.setState({
       board: shuffleBoard(this.state.board), 
-      gameStarted: true
+      gameStarted: true,
+      gameEnded: false
     })
   }
 
-  handlePreEndGame() {
+  handleFastStartGame() {
     this.setState({
-      board: swap(this.props.startBoard, 14, 15)
+      board: swap(solvedBoard, 14, 15),
+      gameStarted: true,
+      gameEnded: false
     })
   }
 
   handleSwapCells(i){
-    let {board} = this.state
-    let i2 = indexOf(null, board)
-    if (areSwappable(i, i2)) {
-      this.setState({
-        board: swap(board, i, i2)
-      }, () => console.log())
+    let {board, gameStarted, gameEnded} = this.state
+
+    if (!gameStarted || gameEnded) {
+      return
     }
-    if(i == 15 || i2 == 14) {
-      setTimeout(() => { 
-        if(isGameEnded(this.state.board)) {
-          alert('You win!')
-          this.setState({
-            board: this.props.startBoard,
-            gameStarted: false
-          })
-        }
-          
-      }, 2000)
+    let i2 = R.indexOf(null, board)
+    if (areSwappable(i, i2)) {
+      let newBoard = swap(board, i, i2)
+      if (isGameEnded(newBoard)) {
+        this.setState({
+          board: newBoard,
+          gameEnded: true
+        }, () => {
+          setTimeout(() => {
+            alert('You win!')
+            this.handleEndGame()
+          }, 2000)
+        })
+      } else {
+        this.setState({
+          board: newBoard
+        })
+      }
     }
   }
 
@@ -69,11 +78,12 @@ class Game extends React.Component {
     return  <main>
       <header>
         <h1>Пятнашки</h1>
+        <Timer statusStartGame={this.state.gameStarted}/>
       </header>
 
       <div className="puzzle-cells">
         {this.state.board.map( (n, i) => 
-          <Cell key={i} id={i} number={n} onClick={this.handleSwapCells}/>
+          <Cell key={i} number={n} onClick={() => this.handleSwapCells(i)}/>
         )}
       </div>
 
@@ -85,16 +95,10 @@ class Game extends React.Component {
           }
         </div>
         <div>
-          <button onClick={this.handlePreEndGame}>За 1 шаг</button>
+          <button onClick={this.handleFastStartGame}>За 1 шаг</button>
         </div>
         
       </div>  
     </main>
   }
 }
-
-Game.propTypes = {
-  startBoard: PT.array.isRequired
-}
-
-ReactDOM.render(<Game startBoard={startBoard} />, document.getElementById('root'))
