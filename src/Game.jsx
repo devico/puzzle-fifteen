@@ -3,9 +3,9 @@ import PT from 'prop-types'
 
 import * as R from 'ramda'
 import {solvedBoard} from "./constants"
-import { shuffleBoard, areSwappable, swap, isGameEnded } from './helpers'
+import { shuffleBoard, areSwappable, swap, isGameEnded, formatTime } from './helpers'
 import Cell from './components/Cell'
-import Timer from './components/Timer'
+import Stats from './components/Stats'
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -14,20 +14,25 @@ export default class Game extends React.Component {
     this.state = {
       board: solvedBoard,
       gameStarted: false,
-      gameEnded: false
+      gameEnded: false,
+      counter: 0,
+      counterSteps: 0
     }
 
     this.handleStartGame = this.handleStartGame.bind(this)
     this.handleEndGame = this.handleEndGame.bind(this)
     this.handleSwapCells = this.handleSwapCells.bind(this)
     this.handleFastStartGame = this.handleFastStartGame.bind(this)
+    this.tick = this.tick.bind(this)
   }
 
   handleEndGame() {
     this.setState({
       board: solvedBoard,
       gameStarted: false,
-      gameEnded: false
+      gameEnded: false,
+      counter: 0,
+      counterSteps: 0
     })
   }
 
@@ -67,10 +72,28 @@ export default class Game extends React.Component {
           }, 2000)
         })
       } else {
+        let counterSteps = this.state.counterSteps + 1
         this.setState({
-          board: newBoard
+          board: newBoard,
+          counterSteps
         })
       }
+    }
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.tick, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+
+  tick() {
+    if(this.state.gameStarted) {
+      let counter = this.state.counter + 1
+      this.setState({ counter })
     }
   }
 
@@ -78,12 +101,17 @@ export default class Game extends React.Component {
     return  <main>
       <header>
         <h1>Пятнашки</h1>
-        <Timer statusStartGame={this.state.gameStarted}/>
       </header>
 
+      <Stats time={formatTime(this.state.counter)} steps={this.state.counterSteps}/>
+
       <div className="puzzle-cells">
-        {this.state.board.map( (n, i) => 
-          <Cell key={i} number={n} onClick={() => this.handleSwapCells(i)}/>
+        {this.state.board.map( (n, i) => <Cell 
+                                           key={i} 
+                                           number={n} 
+                                           onClick={() => this.handleSwapCells(i)} 
+                                           status={this.state.gameStarted}
+                                         />
         )}
       </div>
 

@@ -48,6 +48,15 @@ header h1 {
     position: relative;
 }
 
+.cell-inactive {
+    background-color: #b3b3b3;
+    border-radius: 3px;
+	width: 100px;
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+
 .empty-cell {
     background-color: #fff;
 	width: 100px;
@@ -102,12 +111,23 @@ button {
 }
 
 .timer-time {
-    font-family: monospace;
-    font-size: 2em;
+    font-size: 1.5em;
     color: #5e454b;
 }
 
-.timer-controls button {
-    margin: 5px;
-    color: white;
+.stats-box {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.stats-box section {
+    padding: 0px 10px;
+}
+
+.stats-box div {
+    font-size: 1.5em;
+    color: #5e454b;
 }
