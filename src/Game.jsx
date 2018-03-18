@@ -61,18 +61,18 @@ export default class Game extends React.Component {
     let i2 = R.indexOf(null, board)
     if (areSwappable(i, i2)) {
       let newBoard = swap(board, i, i2)
+      let counterSteps = this.state.counterSteps + 1
       if (isGameEnded(newBoard)) {
         this.setState({
           board: newBoard,
-          gameEnded: true
+          gameEnded: true,
+          counterSteps
         }, () => {
           setTimeout(() => {
-            alert('You win!')
             this.handleEndGame()
           }, 2000)
         })
       } else {
-        let counterSteps = this.state.counterSteps + 1
         this.setState({
           board: newBoard,
           counterSteps
@@ -103,14 +103,19 @@ export default class Game extends React.Component {
         <h1>Пятнашки</h1>
       </header>
 
-      <Stats time={formatTime(this.state.counter)} steps={this.state.counterSteps}/>
+      <Stats 
+        time={formatTime(this.state.counter)} 
+        steps={this.state.counterSteps} 
+        gameEnded={this.state.gameEnded}
+      />
 
       <div className="puzzle-cells">
         {this.state.board.map( (n, i) => <Cell 
                                            key={i} 
                                            number={n} 
                                            onClick={() => this.handleSwapCells(i)} 
-                                           status={this.state.gameStarted}
+                                           gameStarted={this.state.gameStarted}
+                                           gameEnded={this.state.gameEnded}
                                          />
         )}
       </div>

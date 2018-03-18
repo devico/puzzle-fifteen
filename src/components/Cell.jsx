@@ -2,21 +2,23 @@ import React from 'react'
 import PT from 'prop-types'
 
 export default function Cell(props) {
-  let {number, onClick, status} = props
-  return  <button 
-            type="button" 
-            className={`${status 
-                           ? number ? 'cell' : 'empty-cell'
+  let {number, onClick, gameStarted, gameEnded} = props
+  return  <div  
+            className={`${gameStarted 
+                           ? gameEnded 
+                                ? number ? 'cell-win' : 'empty-cell'
+                                : number ? 'cell' : 'empty-cell'
                            : number ? 'cell-inactive' : 'empty-cell'
                          }`} 
             onClick={onClick}
           >
-            <span className="cell-number">{number}</span>
-          </button>
+            <div className="cell-number">{number}</div>
+          </div>
 }
 
 Cell.propTypes = {
   number: PT.number,
   onClick: PT.func.isRequired,
-  status: PT.bool.isRequired
+  gameStarted: PT.bool.isRequired,
+  gameEnded: PT.bool.isRequired
 }

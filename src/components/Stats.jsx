@@ -5,15 +5,17 @@ import Timer from './Timer'
 
 export default function Stats(props) {
   let {steps, time} = props  
-  return <section className="stats-box">
-            <section>
-                <div>{`Ходов: ${steps}`}</div>
-            </section>
-            <Timer time={time} />
-         </section>
+  return <div className="stats-box">
+            <div className="stats-message">{props.gameEnded ? "Вы победили!!!" : ""}</div>
+            <div className="stats-data">
+              <div className="stats-steps">{`Ходов: ${steps}`}</div>
+              <Timer time={time} />
+            </div>
+         </div>
 }
 
 Stats.propTypes = {
   time: PT.string.isRequired,
-  steps: PT.number.isRequired
+  steps: PT.number.isRequired,
+  gameEnded: PT.bool.isRequired
 }
