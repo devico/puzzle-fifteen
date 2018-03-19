@@ -1,11 +1,11 @@
 import React from 'react'
-import PT from 'prop-types'
+import PT from 'prop-types' // eslint-disable-line no-unused-vars
 
 import * as R from 'ramda'
-import {solvedBoard} from "./constants"
-import { shuffleBoard, areSwappable, swap, isGameEnded, formatTime } from './helpers'
-import Cell from './components/Cell'
-import Stats from './components/Stats'
+import {solvedBoard} from './constants'
+import {shuffleBoard, areSwappable, swap, isGameEnded, formatTime} from './helpers'
+import Cell from './components/Cell' // eslint-disable-line no-unused-vars
+import Stats from './components/Stats' // eslint-disable-line no-unused-vars
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class Game extends React.Component {
     this.handleEndGame = this.handleEndGame.bind(this)
     this.handleSwapCells = this.handleSwapCells.bind(this)
     this.handleFastStartGame = this.handleFastStartGame.bind(this)
-    this.tick = this.tick.bind(this)
+    this.tick = this.tick.bind(this);
   }
 
   handleEndGame() {
@@ -38,7 +38,7 @@ export default class Game extends React.Component {
 
   handleStartGame() {
     this.setState({
-      board: shuffleBoard(this.state.board), 
+      board: shuffleBoard(this.state.board),
       gameStarted: true,
       gameEnded: false
     })
@@ -52,16 +52,16 @@ export default class Game extends React.Component {
     })
   }
 
-  handleSwapCells(i){
-    let {board, gameStarted, gameEnded} = this.state
+  handleSwapCells(i) {
+    const {board, gameStarted, gameEnded} = this.state
 
     if (!gameStarted || gameEnded) {
       return
     }
-    let i2 = R.indexOf(null, board)
+    const i2 = R.indexOf(null, board)
     if (areSwappable(i, i2)) {
-      let newBoard = swap(board, i, i2)
-      let counterSteps = this.state.counterSteps + 1
+      const newBoard = swap(board, i, i2)
+      const counterSteps = this.state.counterSteps + 1
       if (isGameEnded(newBoard)) {
         this.setState({
           board: newBoard,
@@ -91,32 +91,32 @@ export default class Game extends React.Component {
 
 
   tick() {
-    if(this.state.gameStarted) {
-      let counter = this.state.counter + 1
-      this.setState({ counter })
+    if (this.state.gameStarted) {
+      const counter = this.state.counter + 1
+      this.setState({counter})
     }
   }
 
   render() {
-    return  <main>
+    return <main>
       <header>
         <h1>Пятнашки</h1>
       </header>
 
-      <Stats 
-        time={formatTime(this.state.counter)} 
-        steps={this.state.counterSteps} 
+      <Stats
+        time={formatTime(this.state.counter)}
+        steps={this.state.counterSteps}
         gameEnded={this.state.gameEnded}
       />
 
       <div className="puzzle-cells">
-        {this.state.board.map( (n, i) => <Cell 
-                                           key={i} 
-                                           number={n} 
-                                           onClick={() => this.handleSwapCells(i)} 
-                                           gameStarted={this.state.gameStarted}
-                                           gameEnded={this.state.gameEnded}
-                                         />
+        {this.state.board.map((n, i) => <Cell
+          key={i}
+          number={n}
+          onClick={() => this.handleSwapCells(i)}
+          gameStarted={this.state.gameStarted}
+          gameEnded={this.state.gameEnded}
+        />
         )}
       </div>
 
@@ -130,8 +130,8 @@ export default class Game extends React.Component {
         <div>
           <button onClick={this.handleFastStartGame}>За 1 шаг</button>
         </div>
-        
-      </div>  
+
+      </div>
     </main>
   }
 }
