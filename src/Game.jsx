@@ -15,6 +15,7 @@ export default class Game extends React.Component {
       board: solvedBoard,
       gameStarted: false,
       gameEnded: false,
+      gamePaused: false,
       counter: 0,
       counterSteps: 0
     }
@@ -22,7 +23,7 @@ export default class Game extends React.Component {
     this.handleStartGame = this.handleStartGame.bind(this)
     this.handleEndGame = this.handleEndGame.bind(this)
     this.handleSwapCells = this.handleSwapCells.bind(this)
-    this.handleFastStartGame = this.handleFastStartGame.bind(this)
+    this.handlePauseGame = this.handlePauseGame.bind(this)
     this.tick = this.tick.bind(this);
   }
 
@@ -44,11 +45,10 @@ export default class Game extends React.Component {
     })
   }
 
-  handleFastStartGame() {
+  handlePauseGame() {
     this.setState({
-      board: swap(solvedBoard, 14, 15),
-      gameStarted: true,
-      gameEnded: false
+      gamePaused: !this.state.gamePaused
+
     })
   }
 
@@ -92,7 +92,7 @@ export default class Game extends React.Component {
 
   tick() {
     if (this.state.gameStarted) {
-      const counter = this.state.counter + 1
+      const counter = this.state.gamePaused ? this.state.counter : this.state.counter + 1
       this.setState({counter})
     }
   }
@@ -116,6 +116,7 @@ export default class Game extends React.Component {
           onClick={() => this.handleSwapCells(i)}
           gameStarted={this.state.gameStarted}
           gameEnded={this.state.gameEnded}
+          gamePaused={this.state.gamePaused}
         />
         )}
       </div>
@@ -123,14 +124,15 @@ export default class Game extends React.Component {
       <div className="manage-box">
         <div>
           {this.state.gameStarted
-            ? <button onClick={this.handleEndGame}>Выйти</button>
+            ? <div className="manage-box-game">
+              <button onClick={this.handleEndGame}>Выйти</button>
+              <button onClick={this.handlePauseGame}>
+                {`${this.state.gamePaused ? 'На паузе' : 'Пауза'}`}
+              </button>
+            </div>
             : <button onClick={this.handleStartGame}>Начать</button>
           }
         </div>
-        <div>
-          <button onClick={this.handleFastStartGame}>За 1 шаг</button>
-        </div>
-
       </div>
     </main>
   }

@@ -2,7 +2,7 @@ import React from 'react' // eslint-disable-line no-unused-vars
 import PT from 'prop-types'
 
 export default function Cell(props) {
-  const {number, onClick, gameStarted, gameEnded} = props
+  const {number, onClick, gameStarted, gameEnded, gamePaused} = props
   return <div
     className={`${gameStarted // eslint-disable-line no-nested-ternary
       ? gameEnded // eslint-disable-line no-nested-ternary
@@ -10,7 +10,7 @@ export default function Cell(props) {
         : number ? 'cell' : 'empty-cell'
       : number ? 'cell-inactive' : 'empty-cell'
     }`}
-    onClick={onClick}
+    onClick={gamePaused ? '' : onClick}
   >
     <div className="cell-number">{number}</div>
   </div>
@@ -20,5 +20,6 @@ Cell.propTypes = {
   number: PT.number,
   onClick: PT.func.isRequired,
   gameStarted: PT.bool.isRequired,
-  gameEnded: PT.bool.isRequired
+  gameEnded: PT.bool.isRequired,
+  gamePaused: PT.bool.isRequired
 }

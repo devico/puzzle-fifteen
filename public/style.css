@@ -91,6 +91,13 @@ header h1 {
     height: 100px;
 }
 
+.cell-on-pause {
+    background-color: mediumseagreen;
+    border-radius: 3px;
+	width: 100px;
+    height: 100px;
+}
+
 .cell-win {
     background-color: violet;
     border-radius: 3px;
@@ -108,6 +115,14 @@ header h1 {
 }
 
 .manage-box {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.manage-box-game {
     display: flex;
     margin: auto;
     align-items: center;
