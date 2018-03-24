@@ -87,7 +87,6 @@ header h1 {
 .cell-inactive {
     background-color: #b3b3b3;
     border-radius: 3px;
-    margin: auto;
 	width: 100px;
     height: 100px;
 }
