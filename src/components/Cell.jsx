@@ -10,7 +10,7 @@ export default function Cell(props) {
         : number ? 'cell' : 'empty-cell'
       : number ? 'cell-inactive' : 'empty-cell'
     }`}
-    onClick={gamePaused ? '' : onClick}
+    onClick={gamePaused ? () => {} : onClick}
   >
     <div className="cell-number">{number}</div>
   </div>
