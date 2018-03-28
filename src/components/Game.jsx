@@ -2,10 +2,10 @@ import React from 'react'
 import PT from 'prop-types' // eslint-disable-line no-unused-vars
 
 import * as R from 'ramda'
-import {solvedBoard} from './constants'
-import {shuffleBoard, areSwappable, swap, isGameEnded, formatTime} from './helpers'
-import Cell from './components/Cell' // eslint-disable-line no-unused-vars
-import Stats from './components/Stats' // eslint-disable-line no-unused-vars
+import {solvedBoard} from '../constants'
+import {shuffleBoard, areSwappable, swap, isGameEnded, formatTime} from '../helpers'
+import Cell from './Cell' // eslint-disable-line no-unused-vars
+import Stats from './Stats' // eslint-disable-line no-unused-vars
 
 export default class Game extends React.Component {
   constructor(props) {
