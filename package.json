@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "test": "ava tests"
+    "test": "ava tests --verbose"
   },
   "repository": {
     "type": "git",

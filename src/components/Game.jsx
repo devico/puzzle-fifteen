@@ -125,12 +125,12 @@ export default class Game extends React.Component {
         <div>
           {this.state.gameStarted
             ? <div className="manage-box-game">
-              <button onClick={this.handleEndGame}>Выйти</button>
-              <button onClick={this.handlePauseGame}>
+              <button id="btnExit" onClick={this.handleEndGame}>Выйти</button>
+              <button id="btnPause" onClick={this.handlePauseGame}>
                 {`${this.state.gamePaused ? 'На паузе' : 'Пауза'}`}
               </button>
             </div>
-            : <button onClick={this.handleStartGame}>Начать</button>
+            : <button id="btnStart" onClick={this.handleStartGame}>Начать</button>
           }
         </div>
       </div>
